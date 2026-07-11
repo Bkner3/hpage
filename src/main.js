@@ -1,20 +1,21 @@
 const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
-document.querySelector("#app").innerHTML = "<p>Loading...</p>";
+document.querySelector("#app").innerHTML = "<p>loading...</p>";
 
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  base: "/hpage/",
+});
 fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
   .then(response => response.json())
   .then(data => {
     let media;
 
     if (data.media_type === "image") {
-      media = `<img src="${data.url}" alt="${data.title}">`;
+      media = `<img src="${data.url}"/>`;
     } else {
-      media = `<iframe
-                  src="${data.url}"
-                  frameborder="0"
-                  allowfullscreen>
-                </iframe>`;
+      media = `<video src="${data.url}" controls></video>`;
     }
 
     document.querySelector("#app").innerHTML = `
