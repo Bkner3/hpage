@@ -1,6 +1,6 @@
 const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
-document.querySelector("#app").innerHTML = "<p>loading...</p>";
+document.querySelector("#app").innerHTML = "<p>Loading...</p>";
 
 fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
   .then(response => response.json())
@@ -8,9 +8,13 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
     let media;
 
     if (data.media_type === "image") {
-      media = `<img src="${data.url}"/>`;
+      media = `<img src="${data.url}" alt="${data.title}">`;
     } else {
-      media = `<video src="${data.url}" controls></video>`;
+      media = `<iframe
+                  src="${data.url}"
+                  frameborder="0"
+                  allowfullscreen>
+                </iframe>`;
     }
 
     document.querySelector("#app").innerHTML = `
