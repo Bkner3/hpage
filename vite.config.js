@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: 'bkner3/hpage',
+  base: 'https://github.com/Bkner3/hpage/',
 })
